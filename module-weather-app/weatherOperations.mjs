@@ -35,7 +35,7 @@ console.log(weatherArray);
 // updateData
 
 function updateData(cityName, updatedTempC, updatedTempF, text) {
-  let getData = weatherArray.find((o) => o.name === cityName);
+  let getData = weatherArray.find((o) => o.name == cityName);
   getData.tempC = updatedTempC;
   getData.tempF = updatedTempF;
   getData.condition.Text = text;
@@ -46,7 +46,7 @@ console.log(weatherArray);
 //deletedata
 
 function deleteData(cityName) {
-  let cityIndex = weatherArray.findIndex((o) => o.name === cityName);
+  let cityIndex = weatherArray.findIndex((o) => o.name == cityName);
   weatherArray.splice(cityIndex, 1);
 }
 deleteData("india");

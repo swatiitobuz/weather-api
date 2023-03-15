@@ -32,7 +32,7 @@ const fileManager = () => {
 
     //created directory
 
-    if (inputValue === 1) {
+    if (inputValue == 1) {
       const createDirectory = async () => {
         const userResponse = await readLineAsync("please create a directory ");
         readline.close();
@@ -52,7 +52,7 @@ const fileManager = () => {
 
     // change directory
 
-    else if (inputValue === 2) {
+    else if (inputValue == 2) {
       const changeDirectory = async () => {
         const userResponse = await readLineAsync(
           "enter the directory to be changed "
@@ -73,7 +73,7 @@ const fileManager = () => {
 
     //delete directory
 
-    else if (inputValue === 3) {
+    else if (inputValue == 3) {
       const deleteDirectory = async () => {
         const userResponse = await readLineAsync(
           "please enter the directory to be deleted "
@@ -91,7 +91,7 @@ const fileManager = () => {
 
     //rename directory
 
-    else if (inputValue === 4) {
+    else if (inputValue == 4) {
       const renameDirectory = async () => {
         const oldDirectory = await readLineAsync(
           "please enter old directory name "
@@ -118,7 +118,7 @@ const fileManager = () => {
 
     //create file
 
-    else if (inputValue === 5) {
+    else if (inputValue == 5) {
       const createFile = async () => {
         const userResponse = await readLineAsync("please enter file name ");
         readline.close();
@@ -132,7 +132,7 @@ const fileManager = () => {
 
     //rename file
 
-    else if (inputValue === 6) {
+    else if (inputValue == 6) {
       const renameFile = async () => {
         const oldFilename = await readLineAsync("please enter old file name ");
         const newFilename = await readLineAsync("please enter new file name ");
@@ -155,7 +155,7 @@ const fileManager = () => {
 
     //delete file
 
-    else if (inputValue === 7) {
+    else if (inputValue == 7) {
       const deleteFile = async () => {
         const userResponse = await readLineAsync(
           "please enter file name to be deleted "
@@ -173,7 +173,7 @@ const fileManager = () => {
 
     //create file inside directory
 
-    else if (inputValue === 8) {
+    else if (inputValue == 8) {
       const createFileInsideDirectory = async () => {
         const directoryName = await readLineAsync(
           "please enter directory name "

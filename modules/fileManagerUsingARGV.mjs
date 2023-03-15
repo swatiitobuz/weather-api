@@ -2,11 +2,6 @@ import * as process from "process";
 import * as fs from "fs";
 import { unlink } from "node:fs/promises";
 import * as path from "path";
-var input = process.argv;
-
-const userResponse = input[3];
-const updateUserResponse = input[4];
-const directoryPath = path.join(userResponse, "./");
 
 console.log("press 1 to create directory");
 console.log("press 2 to rename directory");
@@ -16,6 +11,14 @@ console.log("press 5 to create a  new file");
 console.log("press 6 to rename file");
 console.log("press 7 to delete file");
 console.log("press 8 to create a file inside a directory");
+console.log("please enter 0");
+
+var input = process.argv;
+
+const userResponse = input[3];
+const updateUserResponse = input[4];
+const directoryPath = path.join(userResponse, "./");
+
 
 //create directory
 
@@ -139,3 +142,6 @@ if (input[2] == 8) {
   };
   createFileInsideDirectory();
 }
+
+
+
