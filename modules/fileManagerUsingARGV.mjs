@@ -3,17 +3,19 @@ import * as fs from "fs";
 import { unlink } from "node:fs/promises";
 import * as path from "path";
 
-console.log("press 1 to create directory");
-console.log("press 2 to rename directory");
-console.log("press 3 to change directory");
-console.log("press 4 to delete directory");
-console.log("press 5 to create a  new file");
-console.log("press 6 to rename file");
-console.log("press 7 to delete file");
-console.log("press 8 to create a file inside a directory");
-console.log("please enter 0");
-
 var input = process.argv;
+
+const menu = () => {
+  console.log("press 1 to create directory");
+  console.log("press 2 to rename directory");
+  console.log("press 3 to change directory");
+  console.log("press 4 to delete directory");
+  console.log("press 5 to create a  new file");
+  console.log("press 6 to rename file");
+  console.log("press 7 to delete file");
+  console.log("press 8 to create a file inside a directory");
+};
+menu();
 
 const userResponse = input[3];
 const updateUserResponse = input[4];
@@ -142,6 +144,3 @@ if (input[2] == 8) {
   };
   createFileInsideDirectory();
 }
-
-
-
