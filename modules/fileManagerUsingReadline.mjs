@@ -25,19 +25,19 @@ console.log("press 5 to create a file");
 console.log("press 6 to rename a file");
 console.log("press 7 to delete file");
 console.log("press 8 to create a file inside a directory");
+console.log("enter 0 to exit");
 
 readline.setPrompt("enter a number ");
 readline.prompt();
 fileManager();
 
-const fileManager = () => {
+function fileManager() {
   readline.on("line", (inputValue) => {
     //created directory
 
     if (inputValue == 1) {
       const createDirectory = async () => {
         const userResponse = await readLineAsync("please create a directory ");
-        readline.close();
         try {
           if (!fs.existsSync(userResponse)) {
             fs.mkdirSync(userResponse);
@@ -47,6 +47,9 @@ const fileManager = () => {
             fileManager();
           } else {
             console.log("Directory already exists.");
+            readline.setPrompt("enter a number ");
+            readline.prompt();
+            fileManager();
           }
         } catch (err) {
           console.log(err);
@@ -61,7 +64,6 @@ const fileManager = () => {
         const userResponse = await readLineAsync(
           "enter the directory to be changed "
         );
-        readline.close();
         console.log("current working directory: " + process.cwd());
         try {
           process.chdir("./" + userResponse);
@@ -84,18 +86,17 @@ const fileManager = () => {
         const userResponse = await readLineAsync(
           "please enter the directory to be deleted "
         );
-        readline.close();
         fs.rmdir(userResponse, (err) => {
           if (err) {
             throw err;
           }
           console.log(`${userResponse} is deleted!`);
+          readline.setPrompt("enter a number ");
+          readline.prompt();
+          fileManager();
         });
       };
       deleteDirectory();
-      readline.setPrompt("enter a number ");
-      readline.prompt();
-      fileManager();
     }
 
     //rename directory
@@ -107,7 +108,6 @@ const fileManager = () => {
         const newDirectory = await readLineAsync(
           "please enter new directory name "
         );
-        readline.close();
         if (fs.existsSync(newDirectory)) {
           console.log("Folder already exists");
           return;
@@ -131,7 +131,6 @@ const fileManager = () => {
     else if (inputValue == 5) {
       const createFile = async () => {
         const userResponse = await readLineAsync("please enter file name ");
-        readline.close();
         fs.writeFile(userResponse, "hi", function (err) {
           if (err) throw err;
           console.log(userResponse + "is created successfully.");
@@ -148,7 +147,6 @@ const fileManager = () => {
       const renameFile = async () => {
         const oldFilename = await readLineAsync("please enter old file name ");
         const newFilename = await readLineAsync("please enter new file name ");
-        readline.close();
         if (fs.existsSync(newFilename)) {
           console.log("Folder already exists");
           return;
@@ -174,7 +172,6 @@ const fileManager = () => {
         const userResponse = await readLineAsync(
           "please enter file name to be deleted "
         );
-        readline.close();
         try {
           await unlink(userResponse);
           console.log("successfully deleted" + userResponse);
@@ -195,7 +192,6 @@ const fileManager = () => {
           "please enter directory name "
         );
         const fileName = await readLineAsync("please enter file name ");
-        readline.close();
         const directoryPath = path.join(directoryName, "./");
         fs.writeFileSync(directoryPath + fileName, "this is empty");
         console.log("file created successfully");
@@ -205,5 +201,10 @@ const fileManager = () => {
       };
       createFileInsideDirectory();
     }
+
+    // exit
+    else if (inputValue == 0) {
+      readline.close();
+    }
   });
-};
+}

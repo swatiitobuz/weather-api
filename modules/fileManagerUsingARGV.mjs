@@ -21,7 +21,6 @@ const userResponse = input[3];
 const updateUserResponse = input[4];
 const directoryPath = path.join(userResponse, "./");
 
-
 //create directory
 
 if (input[2] == 1) {
