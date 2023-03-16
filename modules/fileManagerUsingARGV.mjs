@@ -3,19 +3,19 @@ import * as fs from "fs";
 import { unlink } from "node:fs/promises";
 import * as path from "path";
 
-var input = process.argv;
+// const menu = () => {
+//   console.log("press 1 to create directory");
+//   console.log("press 2 to rename directory");
+//   console.log("press 3 to change directory");
+//   console.log("press 4 to delete directory");
+//   console.log("press 5 to create a  new file");
+//   console.log("press 6 to rename file");
+//   console.log("press 7 to delete file");
+//   console.log("press 8 to create a file inside a directory");
+// };
+// menu();
 
-const menu = () => {
-  console.log("press 1 to create directory");
-  console.log("press 2 to rename directory");
-  console.log("press 3 to change directory");
-  console.log("press 4 to delete directory");
-  console.log("press 5 to create a  new file");
-  console.log("press 6 to rename file");
-  console.log("press 7 to delete file");
-  console.log("press 8 to create a file inside a directory");
-};
-menu();
+const input = process.argv;
 
 const userResponse = input[3];
 const updateUserResponse = input[4];

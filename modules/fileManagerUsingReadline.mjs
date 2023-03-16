@@ -16,20 +16,22 @@ const readLineAsync = (msg) => {
     });
   });
 };
+
+console.log("press 1 to created a directory");
+console.log("press 2 to change directory");
+console.log("press 3 to delete directory");
+console.log("press 4 to rename directory");
+console.log("press 5 to create a file");
+console.log("press 6 to rename a file");
+console.log("press 7 to delete file");
+console.log("press 8 to create a file inside a directory");
+
+readline.setPrompt("enter a number ");
+readline.prompt();
+fileManager();
+
 const fileManager = () => {
-  console.log("press 1 to created a directory");
-  console.log("press 2 to change directory");
-  console.log("press 3 to delete directory");
-  console.log("press 4 to rename directory");
-  console.log("press 5 to create a file");
-  console.log("press 6 to rename a file");
-  console.log("press 7 to delete file");
-  console.log("press 8 to create a file inside a directory");
-
-  readline.setPrompt("enter a number ");
-  readline.prompt();
   readline.on("line", (inputValue) => {
-
     //created directory
 
     if (inputValue == 1) {
@@ -40,6 +42,9 @@ const fileManager = () => {
           if (!fs.existsSync(userResponse)) {
             fs.mkdirSync(userResponse);
             console.log(userResponse + " is created.");
+            readline.setPrompt("enter a number ");
+            readline.prompt();
+            fileManager();
           } else {
             console.log("Directory already exists.");
           }
@@ -51,7 +56,6 @@ const fileManager = () => {
     }
 
     // change directory
-
     else if (inputValue == 2) {
       const changeDirectory = async () => {
         const userResponse = await readLineAsync(
@@ -64,6 +68,9 @@ const fileManager = () => {
           console.log(
             "working directory after " + "changing: " + process.cwd()
           );
+          readline.setPrompt("enter a number ");
+          readline.prompt();
+          fileManager();
         } catch (err) {
           console.error("error occurred while " + "changing directory: " + err);
         }
@@ -72,7 +79,6 @@ const fileManager = () => {
     }
 
     //delete directory
-
     else if (inputValue == 3) {
       const deleteDirectory = async () => {
         const userResponse = await readLineAsync(
@@ -87,10 +93,12 @@ const fileManager = () => {
         });
       };
       deleteDirectory();
+      readline.setPrompt("enter a number ");
+      readline.prompt();
+      fileManager();
     }
 
     //rename directory
-
     else if (inputValue == 4) {
       const renameDirectory = async () => {
         const oldDirectory = await readLineAsync(
@@ -110,6 +118,9 @@ const fileManager = () => {
               return;
             }
             console.log("Directory rename successful");
+            readline.setPrompt("enter a number ");
+            readline.prompt();
+            fileManager();
           });
         }
       };
@@ -117,7 +128,6 @@ const fileManager = () => {
     }
 
     //create file
-
     else if (inputValue == 5) {
       const createFile = async () => {
         const userResponse = await readLineAsync("please enter file name ");
@@ -125,13 +135,15 @@ const fileManager = () => {
         fs.writeFile(userResponse, "hi", function (err) {
           if (err) throw err;
           console.log(userResponse + "is created successfully.");
+          readline.setPrompt("enter a number ");
+          readline.prompt();
+          fileManager();
         });
       };
       createFile();
     }
 
     //rename file
-
     else if (inputValue == 6) {
       const renameFile = async () => {
         const oldFilename = await readLineAsync("please enter old file name ");
@@ -147,6 +159,9 @@ const fileManager = () => {
               return;
             }
             console.log("file rename successful");
+            readline.setPrompt("enter a number ");
+            readline.prompt();
+            fileManager();
           });
         }
       };
@@ -154,7 +169,6 @@ const fileManager = () => {
     }
 
     //delete file
-
     else if (inputValue == 7) {
       const deleteFile = async () => {
         const userResponse = await readLineAsync(
@@ -164,6 +178,9 @@ const fileManager = () => {
         try {
           await unlink(userResponse);
           console.log("successfully deleted" + userResponse);
+          readline.setPrompt("enter a number ");
+          readline.prompt();
+          fileManager();
         } catch (error) {
           console.error("there was an error:", error.message);
         }
@@ -172,7 +189,6 @@ const fileManager = () => {
     }
 
     //create file inside directory
-
     else if (inputValue == 8) {
       const createFileInsideDirectory = async () => {
         const directoryName = await readLineAsync(
@@ -183,9 +199,11 @@ const fileManager = () => {
         const directoryPath = path.join(directoryName, "./");
         fs.writeFileSync(directoryPath + fileName, "this is empty");
         console.log("file created successfully");
+        readline.setPrompt("enter a number ");
+        readline.prompt();
+        fileManager();
       };
       createFileInsideDirectory();
     }
   });
 };
-fileManager();
