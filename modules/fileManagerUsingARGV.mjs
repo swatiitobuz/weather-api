@@ -22,7 +22,7 @@ const directoryPath = path.join(userResponse, "./");
 
 // create directory
 
-if (input[2] == 1) {
+if (input[2] === '1') {
   const createDirectory = async () => {
     try {
       if (!fs.existsSync(userResponse)) {
