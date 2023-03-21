@@ -11,4 +11,3 @@ const server = http.createServer((req, res) => {
 });
 server.listen(3002, "127.0.0.1");
 console.log("listening to 127.0.0.1:3002");
-// console.log(__dirname);

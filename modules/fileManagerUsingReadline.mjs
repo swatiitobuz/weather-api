@@ -205,6 +205,11 @@ function fileManager() {
     // exit
     else if (inputValue == 0) {
       readline.close();
+    } else {
+      console.log("please enter the correct input");
+      readline.setPrompt("enter a number ");
+      readline.prompt();
+      fileManager();
     }
   });
 }
