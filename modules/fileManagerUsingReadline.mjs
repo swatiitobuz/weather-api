@@ -35,7 +35,7 @@ function fileManager() {
   readline.on("line", (inputValue) => {
     //created directory
 
-    if (inputValue === '1') {
+    if (inputValue === "1") {
       const createDirectory = async () => {
         const userResponse = await readLineAsync("please create a directory ");
         try {
@@ -59,7 +59,7 @@ function fileManager() {
     }
 
     // change directory
-    else if (inputValue === '2') {
+    else if (inputValue === "2") {
       const changeDirectory = async () => {
         const userResponse = await readLineAsync(
           "enter the directory to be changed "
@@ -81,7 +81,7 @@ function fileManager() {
     }
 
     //delete directory
-    else if (inputValue === '3') {
+    else if (inputValue === "3") {
       const deleteDirectory = async () => {
         const userResponse = await readLineAsync(
           "please enter the directory to be deleted "
@@ -100,7 +100,7 @@ function fileManager() {
     }
 
     //rename directory
-    else if (inputValue === '4') {
+    else if (inputValue === "4") {
       const renameDirectory = async () => {
         const oldDirectory = await readLineAsync(
           "please enter old directory name "
@@ -128,7 +128,7 @@ function fileManager() {
     }
 
     //create file
-    else if (inputValue === '5') {
+    else if (inputValue === "5") {
       const createFile = async () => {
         const userResponse = await readLineAsync("please enter file name ");
         fs.writeFile(userResponse, "hi", function (err) {
@@ -143,7 +143,7 @@ function fileManager() {
     }
 
     //rename file
-    else if (inputValue === '6') {
+    else if (inputValue === "6") {
       const renameFile = async () => {
         const oldFilename = await readLineAsync("please enter old file name ");
         const newFilename = await readLineAsync("please enter new file name ");
@@ -167,7 +167,7 @@ function fileManager() {
     }
 
     //delete file
-    else if (inputValue === '7') {
+    else if (inputValue === "7") {
       const deleteFile = async () => {
         const userResponse = await readLineAsync(
           "please enter file name to be deleted "
@@ -186,7 +186,7 @@ function fileManager() {
     }
 
     //create file inside directory
-    else if (inputValue === '8') {
+    else if (inputValue === "8") {
       const createFileInsideDirectory = async () => {
         const directoryName = await readLineAsync(
           "please enter directory name "
@@ -203,11 +203,9 @@ function fileManager() {
     }
 
     // exit
-    else if (inputValue === '0') {
+    else if (inputValue === "0") {
       readline.close();
-    } 
-    
-    else {
+    } else {
       console.log("please enter the correct input");
       readline.setPrompt("enter a number ");
       readline.prompt();

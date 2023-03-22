@@ -14,15 +14,14 @@ const menu = () => {
   console.log("press 8 to create a file inside a directory");
 };
 
-
 const input = process.argv;
-const userResponse = input[3] || '';
+const userResponse = input[3] || "";
 const updateUserResponse = input[4];
 const directoryPath = path.join(userResponse, "./");
 
 // create directory
 
-if (input[2] === '1') {
+if (input[2] === "1") {
   const createDirectory = async () => {
     try {
       if (!fs.existsSync(userResponse)) {
@@ -39,8 +38,7 @@ if (input[2] === '1') {
 }
 
 //rename directory
-
-if (input[2] == 2) {
+else if (input[2] === "2") {
   const renameDirectory = async () => {
     if (fs.existsSync(updateUserResponse)) {
       console.log("Folder already exists");
@@ -59,8 +57,7 @@ if (input[2] == 2) {
 }
 
 //change directory
-
-if (input[2] == 3) {
+else if (input[2] === "3") {
   const changeDirectory = async () => {
     console.log("current working directory: " + process.cwd());
     try {
@@ -74,8 +71,7 @@ if (input[2] == 3) {
 }
 
 //delete directory
-
-if (input[2] == 4) {
+else if (input[2] === "4") {
   const deleteDirectory = async () => {
     fs.rmdir(userResponse, (err) => {
       if (err) {
@@ -88,8 +84,7 @@ if (input[2] == 4) {
 }
 
 //create file
-
-if (input[2] == 5) {
+else if (input[2] === "5") {
   const createFile = async () => {
     fs.writeFile(userResponse, "hi", function (err) {
       if (err) throw err;
@@ -100,8 +95,7 @@ if (input[2] == 5) {
 }
 
 //rename file
-
-if (input[2] == 6) {
+else if (input[2] === "6") {
   const renameFile = async () => {
     if (fs.existsSync(updateUserResponse)) {
       console.log("Folder already exists");
@@ -120,8 +114,7 @@ if (input[2] == 6) {
 }
 
 //delete file
-
-if (input[2] == 7) {
+else if (input[2] === "7") {
   const deleteFile = async () => {
     try {
       await unlink(userResponse);
@@ -134,10 +127,9 @@ if (input[2] == 7) {
 }
 
 //create file inside a directory
-
-if (input[2] == 8) {
+else if (input[2] === "8") {
   const createFileInsideDirectory = async () => {
-    try{
+    try {
       fs.writeFileSync(directoryPath + updateUserResponse, "this is empty");
       console.log("file created successfully");
     } catch (e) {
@@ -145,8 +137,8 @@ if (input[2] == 8) {
     }
   };
   createFileInsideDirectory();
-}
-
-if(input[2] === undefined){
+} else if (input[2] === undefined) {
   menu();
+} else {
+  console.log("please enter the proper command to execute operations");
 }
