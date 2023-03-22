@@ -139,6 +139,7 @@ else if (input[2] === "8") {
   createFileInsideDirectory();
 } else if (input[2] === undefined) {
   menu();
-} else {
+} 
+else {
   console.log("please enter the proper command to execute operations");
 }
