@@ -5,7 +5,7 @@ import { unlink } from "node:fs/promises";
 
 //menu
 
-export const menu = (userResponse) => {
+export const menu = () => {
   console.log("Press 1 to create directory");
   console.log("Press 2 to rename directory");
   console.log("Press 3 to change directory");
