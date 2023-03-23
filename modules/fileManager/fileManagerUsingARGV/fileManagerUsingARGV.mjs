@@ -46,7 +46,7 @@ else if (input[2] === "8") {
 
 //menu
 else if (input[2] === undefined) {
-  operations.menu(userResponse);
+  operations.menu();
 }
 
 //other inputs
