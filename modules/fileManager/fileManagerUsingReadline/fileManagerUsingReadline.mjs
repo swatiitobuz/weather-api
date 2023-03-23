@@ -34,7 +34,7 @@ getUserInput();
 
 export function fileManager() {
   readline.on("line", (inputValue) => {
-    //created directory
+    //create directory
 
     if (inputValue === "1") {
       operations.createDirectory();
@@ -78,7 +78,10 @@ export function fileManager() {
     // exit
     else if (inputValue === "0") {
       readline.close();
-    } else {
+    }
+
+    //for other inputs
+    else {
       console.log("Please enter the correct input");
       getUserInput();
     }

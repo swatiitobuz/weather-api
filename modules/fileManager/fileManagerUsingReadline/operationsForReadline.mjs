@@ -123,7 +123,7 @@ export const deleteFile = async () => {
     console.log("Successfully deleted" + userResponse);
     operations.getUserInput();
   } catch (error) {
-    console.error("There was an error:", error.message);
+    console.error("There was an error: ", error.message);
   }
 };
 

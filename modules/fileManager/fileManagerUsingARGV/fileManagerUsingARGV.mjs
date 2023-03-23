@@ -1,9 +1,7 @@
 import * as operations from "./operationsForARGV.mjs";
-import * as path from "path";
 const input = process.argv;
 const userResponse = input[3] || "";
 const updateUserResponse = input[4];
-
 
 // create directory
 

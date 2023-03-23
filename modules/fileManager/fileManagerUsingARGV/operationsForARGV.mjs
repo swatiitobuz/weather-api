@@ -1,5 +1,6 @@
 import * as process from "process";
 import * as fs from "fs";
+import * as path from "path";
 import { unlink } from "node:fs/promises";
 
 //menu
@@ -102,7 +103,7 @@ export const deleteFile = async (userResponse) => {
     await unlink(userResponse);
     console.log("successfully deleted" + userResponse);
   } catch (error) {
-    console.error("there was an error:", error.message);
+    console.error("there was an error: ", error.message);
   }
 };
 
