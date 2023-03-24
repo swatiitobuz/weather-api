@@ -22,6 +22,7 @@ console.log("Press 5 to create a file");
 console.log("Press 6 to rename a file");
 console.log("Press 7 to delete file");
 console.log("Press 8 to create a file inside a directory");
+console.log("Press 9 to delete a file inside a directory");
 console.log("Enter 0 to exit");
 
 //user input
@@ -35,48 +36,52 @@ getUserInput();
 export function fileManager() {
   readline.on("line", (inputValue) => {
     //create directory
-
-    if (inputValue === "1") {
+    const inputNumber = Number(inputValue);
+    if (inputNumber === 1) {
       operations.createDirectory();
     }
 
     // change directory
-    else if (inputValue === "2") {
-      operations.changeDirectory();
+    else if (inputNumber === 2) {
+      operations.readDirectory();
     }
 
     //delete directory
-    else if (inputValue === "3") {
+    else if (inputNumber === 3) {
       operations.deleteDirectory();
     }
 
     //rename directory
-    else if (inputValue === "4") {
+    else if (inputNumber === 4) {
       operations.renameDirectory();
     }
 
     //create file
-    else if (inputValue === "5") {
+    else if (inputNumber === 5) {
       operations.createFile();
     }
 
     //rename file
-    else if (inputValue === "6") {
+    else if (inputNumber === 6) {
       operations.renameFile();
     }
 
     //delete file
-    else if (inputValue === "7") {
+    else if (inputNumber === 7) {
       operations.deleteFile();
     }
 
     //create file inside directory
-    else if (inputValue === "8") {
+    else if (inputNumber === 8) {
       operations.createFileInsideDirectory();
+    }
+    //delete file inside directory
+    else if(inputNumber === 9){
+      operations.deleteFileInsideDirectory();
     }
 
     // exit
-    else if (inputValue === "0") {
+    else if (inputNumber === 0) {
       readline.close();
     }
 

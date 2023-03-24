@@ -5,23 +5,24 @@ import { unlink } from "node:fs/promises";
 import * as path from "path";
 import * as operations from "./fileManagerUsingReadline.mjs";
 
-
 //create directory
 
 export const createDirectory = async () => {
   const userResponse = await operations.readLineAsync(
     "Please create a directory "
   );
-
   try {
     if (!fs.existsSync(userResponse)) {
-      fsPromise.mkdir(userResponse).then(() => {
-        console.log(userResponse + " is created.");
-        operations.getUserInput();
-      }).catch(() => {
-        console.log("failed to create " + userResponse);
-        operations.getUserInput();
-      })
+      fsPromise
+        .mkdir(userResponse)
+        .then(() => {
+          console.log(userResponse + " is created.");
+          operations.getUserInput();
+        })
+        .catch(() => {
+          console.log("failed to create " + userResponse);
+          operations.getUserInput();
+        });
     } else {
       console.log("Directory already exists.");
       operations.getUserInput();
@@ -37,19 +38,20 @@ export const readDirectory = async () => {
   const userResponse = await operations.readLineAsync(
     "Enter the directory to be read "
   );
-    const targetDir = userResponse || process.cwd();
-    fs.promises.readdir(targetDir).then(fileNames =>{
-      for(let fileName of fileNames){
+  const targetDir = userResponse || process.cwd();
+  fs.promises
+    .readdir(targetDir)
+    .then((fileNames) => {
+      for (let fileName of fileNames) {
         console.log("files are: " + fileName);
       }
       console.log("File read successfully");
       operations.getUserInput();
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
-    })
-  };
-  
+    });
+};
 
 //delete directory
 
@@ -72,7 +74,9 @@ export const renameDirectory = async () => {
   const oldDirectory = await operations.readLineAsync(
     "Please enter old directory name "
   );
-  const newDirectory = await operations.readLineAsync("Please enter new directory name ");
+  const newDirectory = await operations.readLineAsync(
+    "Please enter new directory name "
+  );
   if (fs.existsSync(newDirectory)) {
     console.log("Folder already exists");
     return;
@@ -82,7 +86,7 @@ export const renameDirectory = async () => {
         console.log(err);
         return;
       }
-      console.log("Directory rename successful");
+      console.log("Directory renamed successfully");
       operations.getUserInput();
     });
   }
@@ -96,7 +100,7 @@ export const createFile = async () => {
   );
   fs.writeFile(userResponse, "hi", function (err) {
     if (err) throw err;
-    console.log(userResponse + "is created successfully.");
+    console.log(userResponse + " is created successfully.");
     operations.getUserInput();
   });
 };
@@ -119,7 +123,7 @@ export const renameFile = async () => {
         console.log(err);
         return;
       }
-      console.log("File rename successful");
+      console.log("File renamed successfully");
       operations.getUserInput();
     });
   }
@@ -143,7 +147,9 @@ export const deleteFile = async () => {
 //create file inside a directory
 
 export const createFileInsideDirectory = async () => {
-  const directoryName = await operations.readLineAsync("Please enter directory name ");
+  const directoryName = await operations.readLineAsync(
+    "Please enter directory name "
+  );
   const fileName = await operations.readLineAsync("Please enter file name ");
   const directoryPath = path.join(directoryName, "./");
   fs.writeFile(directoryPath + fileName, "hi", function (err) {
@@ -153,4 +159,20 @@ export const createFileInsideDirectory = async () => {
   });
   console.log("File created successfully");
   operations.getUserInput();
+};
+
+//delete a file inside a directory
+export const deleteFileInsideDirectory = async () => {
+  const directoryName = await operations.readLineAsync(
+    "Please enter directory name "
+  );
+  const fileName = await operations.readLineAsync("Please enter file name ");
+  const directoryPath = path.join(directoryName, "./");
+  try {
+    await unlink(directoryPath + fileName);
+    console.log("Successfully deleted " + fileName);
+    operations.getUserInput();
+  } catch (error) {
+    console.error("There was an error: ", error.message);
+  }
 };
