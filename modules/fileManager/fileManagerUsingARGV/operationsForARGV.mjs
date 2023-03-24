@@ -21,10 +21,16 @@ export const menu = () => {
 export const createDirectory = async (userResponse) => {
   try {
     if (!fs.existsSync(userResponse)) {
-      fs.mkdirSync(userResponse);
-      console.log(userResponse + " is created.");
+      fsPromise.mkdir(userResponse).then(() => {
+        console.log(userResponse + " is created.");
+        operations.getUserInput();
+      }).catch(() => {
+        console.log("failed to create " + userResponse);
+        operations.getUserInput();
+      })
     } else {
       console.log("Directory already exists.");
+      operations.getUserInput();
     }
   } catch (err) {
     console.log(err);

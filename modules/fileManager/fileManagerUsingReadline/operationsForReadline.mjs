@@ -1,8 +1,10 @@
 import * as fs from "fs";
+import * as fsPromise from "fs/promises";
 import * as process from "process";
 import { unlink } from "node:fs/promises";
 import * as path from "path";
 import * as operations from "./fileManagerUsingReadline.mjs";
+
 
 //create directory
 
@@ -10,11 +12,16 @@ export const createDirectory = async () => {
   const userResponse = await operations.readLineAsync(
     "Please create a directory "
   );
+
   try {
     if (!fs.existsSync(userResponse)) {
-      fs.mkdirSync(userResponse);
-      console.log(userResponse + " is created.");
-      operations.getUserInput();
+      fsPromise.mkdir(userResponse).then(() => {
+        console.log(userResponse + " is created.");
+        operations.getUserInput();
+      }).catch(() => {
+        console.log("failed to create " + userResponse);
+        operations.getUserInput();
+      })
     } else {
       console.log("Directory already exists.");
       operations.getUserInput();
@@ -26,17 +33,23 @@ export const createDirectory = async () => {
 
 //change directory
 
-export const changeDirectory = async () => {
+export const readDirectory = async () => {
   const userResponse = await operations.readLineAsync(
-    "Enter the directory to be changed "
+    "Enter the directory to be read "
   );
-  try {
-    process.chdir("./" + userResponse);
-    operations.getUserInput();
-  } catch (err) {
-    console.error("Error occurred while changing directory: " + err);
-  }
-};
+    const targetDir = userResponse || process.cwd();
+    fs.promises.readdir(targetDir).then(fileNames =>{
+      for(let fileName of fileNames){
+        console.log("files are: " + fileName);
+      }
+      console.log("File read successfully");
+      operations.getUserInput();
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  };
+  
 
 //delete directory
 
@@ -59,7 +72,7 @@ export const renameDirectory = async () => {
   const oldDirectory = await operations.readLineAsync(
     "Please enter old directory name "
   );
-  const newDirectory = await readLineAsync("Please enter new directory name ");
+  const newDirectory = await operations.readLineAsync("Please enter new directory name ");
   if (fs.existsSync(newDirectory)) {
     console.log("Folder already exists");
     return;
@@ -120,7 +133,7 @@ export const deleteFile = async () => {
   );
   try {
     await unlink(userResponse);
-    console.log("Successfully deleted" + userResponse);
+    console.log("Successfully deleted " + userResponse);
     operations.getUserInput();
   } catch (error) {
     console.error("There was an error: ", error.message);
@@ -130,10 +143,14 @@ export const deleteFile = async () => {
 //create file inside a directory
 
 export const createFileInsideDirectory = async () => {
-  const directoryName = await readLineAsync("Please enter directory name ");
+  const directoryName = await operations.readLineAsync("Please enter directory name ");
   const fileName = await operations.readLineAsync("Please enter file name ");
   const directoryPath = path.join(directoryName, "./");
-  fs.writeFileSync(directoryPath + fileName, "this is empty");
+  fs.writeFile(directoryPath + fileName, "hi", function (err) {
+    if (err) throw err;
+    console.log(fileName + " is created successfully.");
+    operations.getUserInput();
+  });
   console.log("File created successfully");
   operations.getUserInput();
 };
