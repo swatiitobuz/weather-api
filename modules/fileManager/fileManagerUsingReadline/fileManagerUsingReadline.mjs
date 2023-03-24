@@ -76,7 +76,7 @@ export function fileManager() {
       operations.createFileInsideDirectory();
     }
     //delete file inside directory
-    else if(inputNumber === 9){
+    else if (inputNumber === 9) {
       operations.deleteFileInsideDirectory();
     }
 
